@@ -1,0 +1,74 @@
+go.property("speed", 200) -- the speed of movement
+
+-- play animation unless the same animation is already playing
+local function play_animation(self, animation)
+	if self.current_animation ~= animation then
+		self.current_animation = animation
+		sprite.play_flipbook("#sprite", animation)
+	end
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.direction = vmath.vector3(0, 0, 0) -- the current direction of movement
+	self.actions = {} -- mapping of input states (action_id mapped to pressed state)
+
+	self.is_jumping = false
+end
+
+function final(self)
+	msg.post(".", "release_input_focus")
+end
+
+function update(self, dt)
+	if self.actions[hash("left")] then
+		play_animation(self, hash("kingwalk"))
+		sprite.set_hflip("#sprite", true)
+		physics.set_hflip("#kingchar",true)
+		self.direction.x = -self.speed
+	elseif self.actions[hash("right")] then
+		play_animation(self, hash("kingwalk"))
+		sprite.set_hflip("#sprite", false)
+		physics.set_hflip("#kingchar",false)
+		self.direction.x = self.speed
+	elseif self.actions[hash("hamm")] then 
+		play_animation(self, hash("ham"))
+		self.direction.x = 2
+	else
+		self.direction.x = 0
+	end
+
+	if self.actions[hash("up")]  then
+		if not self.is_jumping then 
+			play_animation(self, hash("kingwalk"))
+			msg.post("#kingchar", "apply_force",{force = vmath.vector3(0, 2000, 0), position = go.get_world_position()})
+			self.is_jumping = true
+		end
+	end
+
+	if self.direction.x == 0 and self.direction.y == 0 then
+		play_animation(self, hash("Kingidle"))
+	end
+
+	-- this only handles x-axis movement / y-axis is handled by Box2D
+	go.set_position(go.get_position() + self.direction * dt)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("collision_response") then 
+		if message.other_group == hash("ground") then
+			-- print("on ground")
+			self.is_jumping = false
+		end
+	end
+end
+
+function on_input(self, action_id, action)
+	if action_id then
+		if action.pressed then
+			self.actions[action_id] = true
+		elseif action.released then
+			self.actions[action_id] = false
+		end
+	end
+end

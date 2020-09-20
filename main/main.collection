@@ -1,0 +1,134 @@
+name: "main"
+instances {
+  id: "king"
+  prototype: "/main/king.go"
+  position {
+    x: 229.0
+    y: 136.0
+    z: 0.5
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 2.0
+    y: 2.0
+    z: 2.0
+  }
+}
+instances {
+  id: "pignormal"
+  prototype: "/main/pignormal.go"
+  position {
+    x: 430.0
+    y: 133.0
+    z: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 2.0
+    y: 2.0
+    z: 1.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "bg"
+  data: "components {\n"
+  "  id: \"level1\"\n"
+  "  component: \"/assets/level1.tilemap\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 1.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"bg\"\n"
+  "  component: \"/assets/bg.tilemap\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"deco\"\n"
+  "  component: \"/assets/deco.tilemap\"\n"
+  "  position {\n"
+  "    x: 1.0\n"
+  "    y: -40.0\n"
+  "    z: 0.1\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"walls\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/assets/level1.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"\\\"\\n"
+  "mask: \\\"king\\\"\\n"
+  "mask: \\\"pignormal\\\"\\n"
+  "linear_damping: 0.0\\n"
+  "angular_damping: 0.0\\n"
+  "locked_rotation: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 128.0
+    y: 73.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}

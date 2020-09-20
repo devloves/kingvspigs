@@ -1,0 +1,27 @@
+-- play animation unless the same animation is already playing
+local function play_animation(self, animation)
+	if self.current_animation ~= animation then
+		self.current_animation = animation
+		sprite.play_flipbook("#sprite", animation)
+	end
+end
+
+function init(self)
+	local pos = go.get_position()
+	self.direction = vmath.vector3(0, 1, 0)
+	self.moving = false 
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("trigger_response") then 
+		if message.enter then
+			play_animation(self, hash("pnwalk"))
+			king = go.get_position("king")
+			self.moving = true
+			print(“king position :”, king)
+			pos = vmath.vector3(king.x, king.y, 0) 
+		else 
+			self.moving = false
+		end 
+	end
+end
